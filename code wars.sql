@@ -12,15 +12,19 @@
 
 
 
-select customer.customer_id , 
-  customer.email as email,
-  count(payment.amount) as payments_count,
-  cast (sum(payment.amount) as FLOAT) as total_amount
-FROM customer 
+select 
+    customer.customer_id , 
+    customer.email as email,
+    count(payment.amount) as payments_count,
+    cast (sum(payment.amount) as FLOAT) as total_amount
+FROM
+     customer 
 left join 
 payment  on customer.customer_id = payment.customer_id
-group by customer.customer_id, email
-order by total_amount desc
+group by 
+    customer.customer_id, email
+order by 
+    total_amount desc
 limit 10;
 
 
@@ -32,9 +36,13 @@ limit 10;
 -- name
 -- age
 
-SELECT age, count(id) as people_count
-FROM people
-group by age
+SELECT 
+    age, 
+    count(id) as people_count
+FROM 
+    people
+group by 
+    age
 
 
 
@@ -51,8 +59,14 @@ SELECT
   cast (s.transaction_date  as DATE) as day,
   d.name as department ,
   COUNT(s.id) as sale_count
-  FROM department d
-    JOIN sale s on d.id = s.department_id
-  group by department, day
-  order by day, department
+FROM 
+    department d
+JOIN 
+    sale s on d.id = s.department_id
+group by 
+    department, 
+    day
+order by 
+    day, 
+    department
   
